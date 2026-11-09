@@ -1,0 +1,141 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Attack Shark X87 Configurator</title>
+<link rel="stylesheet" href="/style.css">
+</head>
+<body>
+<div class="app">
+  <header>
+    <div class="brand">
+      <div class="logo">X87</div>
+      <div>
+        <h1>Attack Shark X87</h1>
+        <div id="status" class="status"><span class="dot"></span> Connecting…</div>
+      </div>
+    </div>
+    <div class="header-actions">
+      <button id="privacyBtn" class="ghost hidden">Privacy settings</button>
+      <button id="restoreBtn" class="ghost danger">Restore original</button>
+      <button id="quitBtn" class="ghost">Quit</button>
+    </div>
+  </header>
+
+  <nav class="tabs">
+    <button data-tab="lighting" class="active">Lighting</button>
+    <button data-tab="keys">Key remap</button>
+    <button data-tab="backup">Backup</button>
+  </nav>
+
+  <main>
+    <section id="tab-lighting" class="tab active">
+      <div class="grid">
+        <div class="card effects-card">
+          <h2>Lighting effect</h2>
+          <div id="effects" class="effects"></div>
+        </div>
+        <div class="card controls-card">
+          <h2>Adjust</h2>
+          <label>Brightness <span id="brightnessVal">4</span></label>
+          <input id="brightness" type="range" min="0" max="9" step="1" value="4">
+          <label>Speed <span id="speedVal">2</span></label>
+          <input id="speed" type="range" min="0" max="4" step="1" value="2">
+          <label>Colour</label>
+          <div id="colors" class="colors"></div>
+          <button id="applyLighting" class="primary">Apply lighting</button>
+          <p class="hint">Stored on the keyboard. The previous state is backed up before every write.</p>
+        </div>
+      </div>
+    </section>
+
+    <section id="tab-keys" class="tab">
+      <div class="key-toolbar">
+        <div class="segmented" id="layerToggle">
+          <button data-layer="0" class="active">Base layer</button>
+          <button data-layer="1">Fn layer</button>
+        </div>
+        <p class="hint">Click a key, choose its output, then Apply.</p>
+      </div>
+      <div id="macWarning" class="card warning hidden">
+        <strong>Mac mode:</strong> the keyboard uses its internal firmware keymap. F-row settings and key remaps apply only in Windows mode. Flip the physical switch to <strong>Win</strong> to configure them.
+      </div>
+      <div class="card frow-card">
+        <div class="frow-head">
+          <div>
+            <h2>Function row</h2>
+            <p class="hint">Choose what F1–F12 do without holding Fn, separately for each switch profile.</p>
+          </div>
+          <span id="frowState" class="pill">…</span>
+        </div>
+        <div class="frow-profiles">
+          <div class="frow-profile" id="profile-win">
+            <div class="frow-profile-head"><span>Windows profile</span><span class="pill mini">Active</span></div>
+            <div class="segmented" id="winToggle">
+              <button data-mode="fkeys">F keys primary</button>
+              <button data-mode="media">Media primary</button>
+            </div>
+          </div>
+          <div class="frow-profile" id="profile-mac">
+            <div class="frow-profile-head"><span>Mac profile</span><span class="pill mini">Active</span></div>
+            <div class="segmented" id="macToggle">
+              <button data-mode="fkeys" disabled>F keys primary</button>
+              <button data-mode="media" disabled>Media primary</button>
+            </div>
+            <p class="hint">Firmware-fixed: media normal, F keys with Fn.</p>
+          </div>
+        </div>
+        <p class="hint">Windows mode is configurable here and auto-syncs when the switch is in Win. Mac mode is fixed by the keyboard firmware: media normal, F keys with Fn. Use Windows mode on macOS if you want F keys primary. F1–F12 are managed here; individual F-row remaps in the key editor are replaced by the sync.</p>
+      </div>
+      <div id="keyEditor" class="card key-editor hidden">
+        <h2 id="keyTitle">Select a key</h2>
+        <p id="keyCurrent" class="muted"></p>
+        <div class="editor-row">
+          <label for="outputSelect">New output</label>
+          <select id="outputSelect"></select>
+        </div>
+        <p class="hint">Media entries send standard consumer keys. Mac shortcuts include Spotlight (Cmd+Space), App Switcher, Mission Control, screenshots, etc. Dictation and Sleep are not standard HID keys on macOS; they require a custom macOS shortcut or a third-party remapper, so they are not offered here.</p>
+        <div class="editor-row">
+          <button id="applyKey" class="primary">Apply</button>
+          <button id="resetKey" class="ghost">Reset to default</button>
+          <button id="cancelKey" class="ghost">Cancel</button>
+        </div>
+      </div>
+      <div class="keyboard-wrap">
+        <div id="keyboard" class="keyboard">
+          <img src="/keyimg.png" alt="X87 keyboard">
+          <div id="overlays"></div>
+        </div>
+      </div>
+    </section>
+
+    <section id="tab-backup" class="tab">
+      <div class="card">
+        <h2>Backup & restore</h2>
+        <p class="muted">The original configuration was saved before any write. You can also create a new full dump at any time.</p>
+        <div class="button-row">
+          <button id="backupBtn" class="primary">Create full backup</button>
+          <button id="openBackups" class="ghost">Open backup folder</button>
+          <button id="undoBtn" class="ghost">Undo last lighting change</button>
+        </div>
+        <div id="backupResult" class="result"></div>
+      </div>
+      <div class="card">
+        <h2>Safety</h2>
+        <ul class="safety">
+          <li>Wired USB-C only. Do not configure over the 2.4 GHz dongle or Bluetooth.</li>
+          <li>No firmware update command is implemented.</li>
+          <li>Every write saves the previous block to <code>profiles/</code> and verifies the readback.</li>
+          <li>Factory reset on the keyboard: hold <code>Fn + Esc</code> for about 3 seconds.</li>
+        </ul>
+      </div>
+    </section>
+  </main>
+  <footer>Local-only UI on 127.0.0.1 · no cloud · no telemetry</footer>
+</div>
+<div id="toast" class="toast"></div>
+<script>window.X87_TOKEN="__TOKEN__";</script>
+<script src="/app.js"></script>
+</body>
+</html>

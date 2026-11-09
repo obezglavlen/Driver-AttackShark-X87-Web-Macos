@@ -1,0 +1,75 @@
+{
+  "saved_at": "2026-11-09T19:57:57",
+  "device": {
+    "vid": "0x258a",
+    "pid": "0x010c",
+    "name": "Gaming Keyboard",
+    "manufacturer": "BY Tech"
+  },
+  "identity_hex": "0300000001a7",
+  "files": {
+    "colors.bin": {
+      "bytes": 520,
+      "sha256": "dd1db74c9d60f518ba425d142fb09dd5e7abdb850f18bd2c228e6847177ad29f"
+    },
+    "config.bin": {
+      "bytes": 136,
+      "sha256": "52598ab1b7d740dbf86863bb51aaffe8cb824273c488bbc2577f59b6acf5b5f6"
+    },
+    "identity.bin": {
+      "bytes": 14,
+      "sha256": "01b34fa5182344389bda5137fa52b2d52b80782aafb93363a6fc712ebd89e0e8"
+    },
+    "keys-base.bin": {
+      "bytes": 520,
+      "sha256": "fbb753a9802ce2eb24f96f54f9c891a9795b17603f6b28e6361c634d9e8c0799"
+    },
+    "keys-fn.bin": {
+      "bytes": 520,
+      "sha256": "2a6e8e05eec724e35e44d9b3a6e7833b5e91f8245fd788205c377788a23dbc8e"
+    },
+    "macro-0.bin": {
+      "bytes": 520,
+      "sha256": "60d799fd8fc7c593d68802dddff03e7a2aa720d2f20615d822a0e63865d91e40"
+    },
+    "macro-1.bin": {
+      "bytes": 520,
+      "sha256": "fee442662b206d173ef3140e1b1deca13e070668bce1a52dc640b90bd9d620b2"
+    },
+    "macro-2.bin": {
+      "bytes": 520,
+      "sha256": "52ee53f41c4acb2dc29371bd308edc2c23907035961bc2a7e66ab5d0fafd02e8"
+    },
+    "macro-3.bin": {
+      "bytes": 520,
+      "sha256": "2f45f9ae03a2b7a57b056d21ba6973235ba750f94d5d8d8a9bcdbdb5072a3f71"
+    },
+    "macro-4.bin": {
+      "bytes": 520,
+      "sha256": "4506178ac7a82ad3a749f0a23b7ea7223f168963c949d5ebaaaa0f04e0b12805"
+    },
+    "macro-5.bin": {
+      "bytes": 520,
+      "sha256": "90d9a771c76584e52b6948ce45802979baaad54e51d17a128dda865055f881d5"
+    },
+    "macro-6.bin": {
+      "bytes": 520,
+      "sha256": "7ae5e6cfb58b7d18a313b2e71e7cff55a81612fcdb708caf2dcfb243f756eeb1"
+    },
+    "macro-7.bin": {
+      "bytes": 520,
+      "sha256": "a9dee07b9003f930a4defac5c8bde148b90eb89eea539c9e29237e311fb29197"
+    },
+    "macros.bin": {
+      "bytes": 4096,
+      "sha256": "ad7facb2586fc6e966c004d7d1d16b024f5805ff7cb47c7a85dabd8b48892ca7"
+    },
+    "perkey.bin": {
+      "bytes": 520,
+      "sha256": "6d269900069e8b1b2d48105b2ad79fa9f42f67870d03688dd006a7bf9a046e2f"
+    }
+  },
+  "config_sha256": "850d246ed5005b76646b1ab55702ad2d954f774f079377235662402d41a2f727",
+  "colors_sha256": "cb38bb8eb3ef4fbcbf42ceb550656409d5672b8681510531f4f1c78bb7cea1ea",
+  "perkey_sha256": "2542e48d454127cf918ae0330b12fd7fd7283793b4a0a46b7333fc582824de55"
+}

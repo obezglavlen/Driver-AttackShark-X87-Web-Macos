@@ -1,0 +1,5 @@
+#!/bin/zsh
+APP_DIR="$(cd "$(dirname "$0")/../../.." && pwd)"
+echo "APP_DIR=$APP_DIR" >> /tmp/x87gui.log
+cd "$APP_DIR" || exit 1
+exec /usr/bin/python3 -u "$APP_DIR/tools/x87gui.py" >> /tmp/x87gui.log 2>&1
