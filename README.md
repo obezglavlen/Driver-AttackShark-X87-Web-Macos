@@ -53,11 +53,23 @@ third-party remapper; they are therefore not offered in the GUI.
 
 ## Troubleshooting: Input Monitoring
 
-The `.app` needs **System Settings → Privacy & Security → Input Monitoring**
-permission to open the keyboard's vendor HID interface. Add `X87 Configurator.app`
-and, if needed, `~/x87/tools/x87io`, then relaunch.
+The reliable launcher is **`start-gui.command`**. Double-click it in Finder; it
+opens Terminal and starts the server. Allow **Terminal** in
+System Settings → Privacy & Security → Input Monitoring. That path works because
+Terminal already has the HID permission.
 
-As a fallback, run the server from a terminal:
+The included `X87 Configurator.app` is optional. On macOS its HID access is
+attributed to **Python.app**, not to the app bundle, so granting
+`X87 Configurator` and `x87io` alone may still produce
+`kIOReturnNotPermitted`. If that happens, use `start-gui.command` instead.
+
+If you really want to use the `.app`, add this to Input Monitoring as well:
+
+```text
+/Library/Developer/CommandLineTools/Library/Frameworks/Python3.framework/Versions/3.9/Resources/Python.app
+```
+
+The terminal fallback is always:
 
 ```sh
 cd ~/x87
@@ -81,12 +93,16 @@ backup/manifest.json   sizes + SHA-256
 
 Every write made by `x87ctl.py` also saves the previous block to `profiles/`.
 
-## GUI
+## Running the GUI (recommended)
 
-Double-click `X87 Configurator.app`. It starts a local-only web UI and opens your browser.
-The URL is also written to `/tmp/x87gui.log`. The **Quit** button in the UI stops it.
+Double-click **`start-gui.command`** in Finder. It opens Terminal, starts the
+local-only web UI, and opens your browser. The URL is also written to
+`/tmp/x87gui.log`. The **Quit** button in the UI stops it, or close the Terminal
+window.
 
-If macOS ever refuses to open the unsigned app, right-click it and choose **Open**.
+`X87 Configurator.app` is included as an optional launcher, but the `.command`
+path is more reliable on macOS because the app's Python process has the extra
+Input Monitoring permission ambiguity described below.
 
 ## CLI usage
 
@@ -131,8 +147,8 @@ gui/                 web UI, including keyimg.png keyboard render
 layout/KB.ini        OEM key layout metadata used by the configurator
 layout/text.xml      OEM effect names
 backup/              original read-only keyboard backup
-X87 Configurator.app local launcher for the web UI
-start-gui.command    terminal launcher
+X87 Configurator.app optional launcher (may be blocked by Python TCC)
+start-gui.command    recommended launcher (Terminal)
 ```
 
 The compiled helpers are for macOS arm64. Rebuild them with:
