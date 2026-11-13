@@ -160,6 +160,8 @@ clang -O2 -o tools/x87backup tools/x87backup.c -framework IOKit -framework CoreF
 
 ## Assets and licensing
 
+The project source code is licensed under the MIT License (see `LICENSE`).
+
 The OEM Windows installer and its binary are **not** included. `gui/keyimg.png`,
 `X87 Configurator.app/Contents/Resources/appicon.icns`, and the layout metadata in
 `layout/` are extracted from the OEM installer and are included only so the tool
